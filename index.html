@@ -4,14 +4,15 @@
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
   </head>
   <body>
-    <p> 请稍后，正在列出资料 </p>
-    <p id='result'></p>
+    <p id="notice"> 请稍后，正在列出资料 </p>
+    <div id='result'></div>
     <script>
       $.getJSON('https://bndsoierteam.github.io/oi-resources/pages.json', function(data){
         data.forEach(function(item, key){
-          $('#result').html($('#result').html()+item['name']+'\n');
+          $('#result').html($('#result').html()+'<a href='+item['id']+'>'+item['name']+'</a>\n');
         })
       });
+      $('#notice').html('已列出！')
     </script>
   </body>
 </html>
