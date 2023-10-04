@@ -6,10 +6,11 @@
   <body>
     <p id="notice"> 请稍后，正在列出资料 </p>
     <div id='result'></div>
+    <div id='reader'></div>
     <script>
       $.getJSON('https://bndsoierteam.github.io/oi-resources/pages.json', function(data){
         data.forEach(function(item, key){
-          $('#result').html($('#result').html()+'<a href='+item['id']+'>'+item['name']+'</a>\n');
+          $('#result').html($('#result').html()+'<a onclick=javascript:show(\''+item['id']+')>'+item['name']+'</a>\n');
         })
       $('#notice').html('已列出！')
       });
