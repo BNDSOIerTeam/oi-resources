@@ -1,9 +1,12 @@
 <html>
   <head>
     <title> BNDS OIer 信息学资料库 </title>
-    <script src="https://code.jquery.com/jquery-3.7.1.min.js"/>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
   </head>
   <body>
     <p> 请稍后，正在列出资料 </p>
+    <script>
+      $.getJSON('https://bndsoierteam.github.io/oi-resources/pages.json', function(data){alert(data);});
+    </script>
   </body>
 </html>
