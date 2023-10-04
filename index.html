@@ -5,8 +5,13 @@
   </head>
   <body>
     <p> 请稍后，正在列出资料 </p>
+    <p id='result'></p>
     <script>
-      $.getJSON('https://bndsoierteam.github.io/oi-resources/pages.json', function(data){alert(data);});
+      $.getJSON('https://bndsoierteam.github.io/oi-resources/pages.json', function(data){
+        data.forEach(function(item, key){
+          $('#result').html($('#result').html()+item['name']+'\n');
+        })
+      });
     </script>
   </body>
 </html>
