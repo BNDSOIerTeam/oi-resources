@@ -10,7 +10,7 @@
     <script>
       $.getJSON('https://bndsoierteam.github.io/oi-resources/pages.json', function(data){
         data.forEach(function(item, key){
-          $('#result').html($('#result').html()+'<a onclick=javascript:show(\''+item['id']+')>'+item['name']+'</a>\n');
+          $('#result').html($('#result').html()+'<a onclick=javascript:show(\''+item['id']+'\')>'+item['name']+'</a>\n');
         })
       $('#notice').html('已列出！')
       });
