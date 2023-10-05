@@ -38,8 +38,7 @@ jobs:
       - name: Copy Files
         run: cp index.html */
       - name: Build Pages Metadata
-        use: python buildmeta.py
-        run: build_metadata.py
+        run: python build_metadata.py
       - name: Setup Pages
         uses: actions/configure-pages@v3
       - name: Upload artifact
