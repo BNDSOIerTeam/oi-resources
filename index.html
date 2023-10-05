@@ -3,23 +3,39 @@
     <title> BNDS OIer 信息学资料库 </title>
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <meta charset="UTF-8">
     <script>
-      var show=function(id){
-      alert(id);   
-      $.get('https://bndsoierteam.github.io/oi-resources/'+id+'.md',function(data){$('#reader').html(marked.parse(data))})
+      var current_show = null;
+      var show=function(id,ispure){
+          if(current_show == id){
+              $('#reader-'+id).css('display','none');
+              current_show=null;
+          }else{
+              if($('#reader-'+id).html()=='' && ispure){
+                  $.get(id+'.md',function(data){ $('#reader-'+id).html(marked.parse(data)); });
+              }
+              $('#reader-'+id).css('display','block');
+              current_show=id;
+          }
       }
           </script>
   </head>
   <body>
     <p id="notice"> 请稍后，正在列出资料 </p>
     <div id='result'></div>
-    <div id='reader'></div>
     <script>
-      $.getJSON('https://bndsoierteam.github.io/oi-resources/pages.json', function(data){
+      $.getJSON('pages.json', function(data){
         data.forEach(function(item, key){
-          $('#result').html($('#result').html()+'<a onclick=javascript:show(\''+item['id']+'\')>'+item['name']+'</a>\n');
+          if(item['redirect']){  // redirect
+              $('#result').html($('#result').html()+'<p style=\'color:blue\' onclick=\"javascript:show(\''+item['id']+'\', false)\">'+item['name']+'</p>\n<iframe src=\''+item['redirect']+'\' style=\'border-style:solid; display: none;\' id=\'reader-'+item['id']+'\'></div>\n');
+              var frame = $('#reader-'+item['id']);
+              frame.attr('height', document.documentElement.clientHeight)
+              frame.attr('width', document.documentElement.clientWidth)
+          }else{
+              $('#result').html($('#result').html()+'<p style=\'color:blue\' onclick=\"javascript:show(\''+item['id']+'\', true)\">'+item['name']+'</p>\n<div style=\'border-style:solid; display: none;\' id=\'reader-'+item['id']+'\'></div>\n');
+          }
         })
-      $('#notice').html('已列出！')
+      $('#notice').html('资料：')
       });
     </script>
   </body>
