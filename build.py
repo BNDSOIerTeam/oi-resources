@@ -9,6 +9,8 @@ index_text = pathlib.Path('index.html').read_text(encoding='utf8')
 mdengine = Markdown(extensions = ['meta'])
 
 for dir in pathlib.Path('.').glob('**'):
+    if dir.name[0]=='.':
+        continue
     (dir/'index.html').write_text(index_text,encoding='utf8')
     result = []
     for file in dir.glob('*.md'):
